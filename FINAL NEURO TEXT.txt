@@ -1,0 +1,126 @@
+Neuro:
+Neuro refers to nervous system and brain.
+It uses scientific methods to understand brain, nervous system or brain related human behaviour.
+Brain:
+The brain processes information and coordinates many functions.
+Nervous System:
+Communication network.
+2 types:
+1)Central Nervous System:
+Brain + spinal cord
+2)Peripheral nervous system:
+This connects the central nervous system with the rest of the body.
+---> Neuro research study about:
+	Brain structure: What parts of the brain are involved in a particular function?
+	Brain activity: What happens in the brain while someone performs a task?
+
+
+
+Dyslexia:
+
+What is Dyslexia?
+Dyslexia is a neuro biological learning difference that affects how the brain processes language.
+Dyslexia is a specific learning difficulty that mainly affects reading and language-related skills. A person with dyslexia may have difficulty with reading words accurately or fluently, spelling, or connecting written letters with their sounds.
+A common myth is that dyslexia is an eye problem where letters float or flip backwards (or) that it reflects a lack of intelligence. In reality dyslexia does not mean a person has low intelligence. A person can have normal or high intelligence and still have dyslexia.
+
+
+
+Common difficulties
+
+A person with dyslexia may experience:
+
+🔤 Difficulty recognizing or decoding unfamiliar words
+📖 Reading more slowly or with less fluency
+✍️ Frequent spelling difficulties
+🔄 Confusing similar-looking or similar-sounding words/letters
+🧩 Difficulty breaking words into individual sounds
+📝 Difficulty remembering how certain words are spelled
+⏱️ Needing more time to read and process written material
+
+The exact difficulties may vary from person to person.
+
+
+Causes / Factors Associated with Dyslexia
+
+🧬 Genetic factors — Dyslexia can run in families and has a hereditary component.
+🧠 Differences in brain development — Brain networks involved in reading and language may develop and communicate differently.
+🔤 Phonological processing difficulties — Difficulty in identifying and manipulating the individual sounds in spoken words.
+📚 Reading and language processing differences — The brain may process written language less efficiently, making decoding and fluent reading more difficult.
+
+why is age group important in predicting whether a person has dyslexia or not?
+
+Age is important because reading ability and eye-movement behavior naturally change as people grow. If we don't account for age, a machine-learning model might mistake normal age-related differences for signs of dyslexia.
+
+why it is affected mostly or seen mostly on 5-12 years age group?
+
+✅ "Dyslexia can occur across the lifespan, but it is commonly identified during the school-age years (approximately 5–12) because reading and spelling skills are developing rapidly and persistent difficulties become more apparent."
+
+
+Some important terms we need to know:
+Fixation: A period when the eyes remain relatively still and focused on a particular word or part of the text to process the visual information.
+
+
+Saccade:
+A rapid movement of the eyes from one location to another, allowing the reader to move from one word or part of the text to the next.
+
+
+Regression:
+A backward movement of the eyes to a previously viewd text, usually occurs when the reader needs to recheck or process information again.
+
+
+
+👁️ Eye-tracking features — important for your project
+
+        FIXATION_COUNT
+	TOTAL_READING_TIME
+	FIXATION_DURATION
+	FIXATION_X
+	FIXATION_Y
+	FIRST_RUN_TOTAL_READING_TIME
+	FIRST_SACCADE_AMPLITUDE
+	REGRESSION_IN
+        REGRESSION_OUT
+	REGRESSION_OUT_FULL
+	REGRESSION_PATH_DURATION
+	SKIP
+
+1.Subject ID:
+Unique identifier for the person whose eye-tracking data was recorded. It has no physiological or reading meaning.
+
+
+
+
+2.FIRST-RUN_TOTAL_READING_TIME:
+	It measures the time required by the participant during the first reading pass. Higher reading time can indicate greater difficulty in processing the text,making this an important feature for distinguishing dyslexic and typical readers.
+
+******Do not think we make the participant read the text twice(wrong assumption)
+magine this 👇
+
+You show a participant a sentence on a screen:
+
+“The boy is playing football.”
+
+The participant looks at the sentence and reads it normally from beginning to end.
+
+Their eyes might move like this:
+
+The → boy → is → playing → football
+
+Initial Reading Pass means:The first time their eyes go through the text while reading it.
+Text appears -> person starts reading ->this initial movement is recorded.
+
+
+
+3.REGRESSION_OUT:
+It gives us the information of "To what extent does the reader move backward from the current reading location?" which is particularly relevant to dyslexia detection.
+
+
+4.REGRESSION_OUT_FULL:
+REGRESSION_OUT_FULL is a complete measurement of outgoing regression behaviour, capturing information about backward eye movements during reading.
+
+
+
+5.REGRESSION_PATH_DURATION:
+here we combine the idea of regression + duration.
+
+
