@@ -11,12 +11,23 @@ const $$ = (selector) => [...document.querySelectorAll(selector)];
 
 // FastAPI address. When the page is opened from the backend itself (http://127.0.0.1:8000)
 // the same origin is used; otherwise the usual local addresses are tried in turn.
+
 const API_CANDIDATES = (() => {
-    const list = [];
-    if (location.port === "8000") list.push("");
-    ["http://127.0.0.1:8000", "http://localhost:8000"].forEach((u) => { if (!list.includes(u)) list.push(u); });
+    const list = [
+        "https://neurovision-backend-vua7.onrender.com"
+    ];
+
+    if (location.hostname === "localhost" ||
+        location.hostname === "127.0.0.1") {
+        list.push(
+            "http://127.0.0.1:8000",
+            "http://localhost:8000"
+        );
+    }
+
     return list;
 })();
+
 let API_BASE_URL = API_CANDIDATES[0];
 
 async function apiFetch(path, options) {
