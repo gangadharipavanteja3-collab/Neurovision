@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="#153e3b" name="theme-color"/>
+  <title>
+   Neuro Vision | Insights Within
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js">
+  </script>
+  <script async="" src="https://docs.opencv.org/4.x/opencv.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+  </script>
+ </head>
+ <body>
+  <div class="auth-shell" id="authView">
+   <div class="auth-top">
+    <a aria-label="Neuro Vision home" class="brand brand-auth" href="#">
+     <span aria-hidden="true" class="brand-mark">
+      <svg focusable="false" role="img" viewBox="0 0 48 48">
+       <path d="M4.5 24s6.7-12 19.5-12 19.5 12 19.5 12-6.7 12-19.5 12S4.5 24 4.5 24Z">
+       </path>
+       <circle cx="24" cy="24" r="8.5">
+       </circle>
+       <circle class="eye-pupil" cx="24" cy="24" r="4">
+       </circle>
+       <circle class="eye-glint" cx="27" cy="21" r="1.6">
+       </circle>
+      </svg>
+     </span>
+     <span>
+      <strong>
+       Neuro Vision
+      </strong>
+      <small>
+       Insights Within
+      </small>
+     </span>
+    </a>
+    <span class="auth-top-note">
+     A reading observation workspace
+    </span>
+   </div>
+   <main class="auth-main">
+    <section class="auth-card">
+     <div class="auth-heading">
+      <span class="eyebrow">
+       WELCOME TO NEURO VISION
+      </span>
+      <h1 id="authTitle">
+       Welcome back
+      </h1>
+      <p id="authSubtitle">
+       Sign in to continue to your workspace.
+      </p>
+     </div>
+     <form class="auth-form" id="loginForm">
+      <label class="field-label" for="loginEmail">
+       Email address
+      </label>
+      <input autocomplete="email" id="loginEmail" placeholder="name@example.com" required="" type="email"/>
+      <div class="label-row">
+       <label class="field-label" for="loginPassword">
+        Password
+       </label>
+       <button class="text-button" id="forgotPassword" type="button">
+        Forgot password?
+       </button>
+      </div>
+      <input autocomplete="current-password" id="loginPassword" placeholder="Enter your password" required="" type="password"/>
+      <p aria-live="polite" class="form-message" id="loginMessage">
+      </p>
+      <button class="button button-auth" type="submit">
+       Login
+       <span>
+        &rarr;
+       </span>
+      </button>
+     </form>
+     <form class="auth-form hidden" id="registerForm">
+      <label class="field-label" for="registerName">
+       Name
+      </label>
+      <input id="registerName" placeholder="Enter your name" required="" type="text"/>
+      <label class="field-label" for="registerEmail">
+       Email address
+      </label>
+      <input id="registerEmail" placeholder="name@example.com" required="" type="email"/>
+      <label class="field-label" for="registerPassword">
+       Create password
+      </label>
+      <input id="registerPassword" placeholder="At least 6 characters" required="" type="password"/>
+      <small class="field-hint">
+       Use at least 6 characters, one uppercase letter and one number.
+      </small>
+      <label class="field-label" for="confirmPassword">
+       Confirm password
+      </label>
+      <input id="confirmPassword" placeholder="Re-enter your password" required="" type="password"/>
+      <p aria-live="polite" class="form-message" id="registerMessage">
+      </p>
+      <button class="button button-auth" type="submit">
+       Create account
+       <span>
+        &rarr;
+       </span>
+      </button>
+     </form>
+     <form class="auth-form hidden" id="resetForm">
+      <label class="field-label" for="resetEmail">Registered email address</label>
+      <input autocomplete="email" id="resetEmail" placeholder="name@example.com" required="" type="email"/>
+      <label class="field-label" for="resetPassword">New password</label>
+      <input autocomplete="new-password" id="resetPassword" placeholder="At least 6 characters" required="" type="password"/>
+      <small class="field-hint">Use at least 6 characters, one uppercase letter and one number.</small>
+      <label class="field-label" for="resetConfirm">Confirm new password</label>
+      <input autocomplete="new-password" id="resetConfirm" placeholder="Re-enter the new password" required="" type="password"/>
+      <p aria-live="polite" class="form-message" id="resetMessage"></p>
+      <button class="button button-auth" type="submit">Reset password <span>&rarr;</span></button>
+     </form>
+     <div class="auth-switch">
+      <span id="authSwitchText">
+       New to Neuro Vision?
+      </span>
+      <button class="text-button" id="authSwitchButton" type="button">
+       Create an account
+      </button>
+     </div>
+     <p class="auth-demo-note">
+      Your account is stored in this browser for this frontend version.
+     </p>
+    </section>
+   </main>
+   <div class="auth-bottom">
+    NEURO VISION
+    <span>
+     &bull;
+    </span>
+    INSIGHTS WITHIN
+   </div>
+  </div>
+  <div class="app-shell hidden" id="appView">
+   <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+     <a class="brand" data-page="dashboard" href="#">
+      <span aria-hidden="true" class="brand-mark">
+       <svg focusable="false" role="img" viewBox="0 0 48 48">
+        <path d="M4.5 24s6.7-12 19.5-12 19.5 12 19.5 12-6.7 12-19.5 12S4.5 24 4.5 24Z">
+        </path>
+        <circle cx="24" cy="24" r="8.5">
+        </circle>
+        <circle class="eye-pupil" cx="24" cy="24" r="4">
+        </circle>
+        <circle class="eye-glint" cx="27" cy="21" r="1.6">
+        </circle>
+       </svg>
+      </span>
+      <span class="brand-copy">
+       <strong>
+        Neuro Vision
+       </strong>
+       <small>
+        Insights Within
+       </small>
+      </span>
+     </a>
+     <button aria-label="Collapse sidebar" class="icon-button sidebar-toggle" id="sidebarToggle">
+      ☰
+     </button>
+    </div>
+    <div class="workspace-label">
+     WORKSPACE
+    </div>
+    <nav aria-label="Main navigation" class="side-nav">
+     <button class="nav-link active" data-page="dashboard">
+      <span class="nav-icon">
+       ⌂
+      </span>
+      <span class="nav-text">
+       Dashboard
+      </span>
+     </button>
+     <button class="nav-link" data-page="assessment">
+      <span class="nav-icon">
+       ＋
+      </span>
+      <span class="nav-text">
+       New Assessment
+      </span>
+     </button>
+     <button class="nav-link" data-page="history">
+      <span class="nav-icon">
+       ◷
+      </span>
+      <span class="nav-text">
+       Assessment History
+      </span>
+     </button>
+     <button class="nav-link" data-page="analytics">
+      <span class="nav-icon">
+       ▥
+      </span>
+      <span class="nav-text">
+       Reading Analytics
+      </span>
+     </button>
+     <button class="nav-link" data-page="reports">
+      <span class="nav-icon">
+       ▤
+      </span>
+      <span class="nav-text">
+       Reports
+      </span>
+     </button>
+    </nav>
+    <div class="workspace-label secondary-label">
+     PREFERENCES
+    </div>
+    <nav class="side-nav">
+     <button class="nav-link" data-page="settings">
+      <span class="nav-icon">
+       ⚙
+      </span>
+      <span class="nav-text">
+       Settings
+      </span>
+     </button>
+     <button class="nav-link" data-page="help">
+      <span class="nav-icon">
+       ?
+      </span>
+      <span class="nav-text">
+       Help &amp; Support
+      </span>
+     </button>
+    </nav>
+    <div class="sidebar-bottom">
+     <div class="sidebar-profile">
+      <div class="avatar" id="userAvatar">
+       NV
+      </div>
+      <div class="profile-copy">
+       <strong id="sidebarUser">
+        Demo User
+       </strong>
+      </div>
+     </div>
+     <button class="logout-button" id="logoutButton">
+      &rarrhk;
+      <span class="nav-text">
+       Sign out
+      </span>
+     </button>
+    </div>
+   </aside>
+   <main class="main-area">
+    <header class="topbar">
+     <div class="mobile-brand">
+      <span aria-hidden="true" class="brand-mark">
+       <svg focusable="false" role="img" viewBox="0 0 48 48">
+        <path d="M4.5 24s6.7-12 19.5-12 19.5 12 19.5 12-6.7 12-19.5 12S4.5 24 4.5 24Z">
+        </path>
+        <circle cx="24" cy="24" r="8.5">
+        </circle>
+        <circle class="eye-pupil" cx="24" cy="24" r="4">
+        </circle>
+        <circle class="eye-glint" cx="27" cy="21" r="1.6">
+        </circle>
+       </svg>
+      </span>
+      <strong>
+       Neuro Vision
+      </strong>
+     </div>
+     <div class="breadcrumb">
+      <span>
+       Workspace
+      </span>
+      <b>
+       /
+      </b>
+      <strong id="pageHeading">
+       Dashboard
+      </strong>
+     </div>
+     <div class="topbar-right">
+      <div class="topbar-avatar" id="topbarAvatar">
+       NV
+      </div>
+     </div>
+    </header>
+    <div class="page-content">
+     <section class="page-section active" id="page-dashboard">
+      <div class="hero-panel">
+       <div aria-hidden="true" class="hero-art">
+       </div>
+       <div class="hero-content">
+        <span class="eyebrow light-eyebrow">
+         A CLEARER VIEW OF READING
+        </span>
+        <h1 class="hero-title">
+         <span>
+          Every
+         </span>
+         <span>
+          Glance
+         </span>
+         <br/>
+         <span>
+          Tells a
+         </span>
+         <span>
+          Story.
+         </span>
+        </h1>
+        <p>
+         Explore reading patterns through a guided experience designed for learning, observation and research.
+        </p>
+        <button class="button button-primary" data-go="assessment">
+         Start an assessment
+         <span>
+          &rarr;
+         </span>
+        </button>
+       </div>
+       <div class="hero-orbit orbit-one">
+       </div>
+       <div class="hero-orbit orbit-two">
+       </div>
+       <div class="hero-caption">
+        OBSERVE
+        <span>
+         &bull;
+        </span>
+        UNDERSTAND
+        <span>
+         &bull;
+        </span>
+        SUPPORT
+       </div>
+      </div>
+      <div class="section-intro">
+       <div>
+        <span class="eyebrow">
+         YOUR WORKSPACE
+        </span>
+        <h2>
+         Welcome to Neuro Vision
+        </h2>
+        <p>
+         A simple space to explore reading behaviour and understand the observations collected during a session.
+        </p>
+       </div>
+      </div>
+      <div class="feature-grid">
+       <article class="feature-card feature-salmon">
+        <div class="feature-icon">
+         ◎
+        </div>
+        <h3>
+         Eye movement
+        </h3>
+        <p>
+         Explore fixations, saccades and reading direction.
+        </p>
+        <span class="feature-arrow">
+         &nearrow;
+        </span>
+       </article>
+       <article class="feature-card feature-teal">
+        <div class="feature-icon">
+         ⌁
+        </div>
+        <h3>
+         Reading activity
+        </h3>
+        <p>
+         Follow a reading passage at a comfortable pace.
+        </p>
+        <span class="feature-arrow">
+         &nearrow;
+        </span>
+       </article>
+       <article class="feature-card feature-lilac">
+        <div class="feature-icon">
+         ◖
+        </div>
+        <h3>
+         Speech recognition
+        </h3>
+        <p>
+         View a live transcript when browser support is available.
+        </p>
+        <span class="feature-arrow">
+         &nearrow;
+        </span>
+       </article>
+       <article class="feature-card feature-cream">
+        <div class="feature-icon">
+         ▤
+        </div>
+        <h3>
+         Session reports
+        </h3>
+        <p>
+         Review a clearly labelled assessment report preview.
+        </p>
+        <span class="feature-arrow">
+         &nearrow;
+        </span>
+       </article>
+      </div>
+      <div class="dashboard-lower">
+       <article class="panel getting-started">
+        <div class="panel-heading">
+         <div>
+          <span class="eyebrow">
+           QUICK GUIDE
+          </span>
+          <h3>
+           Getting started
+          </h3>
+         </div>
+        </div>
+        <ol class="guide-list">
+         <li>
+          <span>
+           01
+          </span>
+          <div>
+           <strong>
+            Enter participant details
+           </strong>
+           <small>
+            Fill in the basic information before starting.
+           </small>
+          </div>
+         </li>
+         <li>
+          <span>
+           02
+          </span>
+          <div>
+           <strong>
+            Check your devices
+           </strong>
+           <small>
+            Allow camera and microphone access if you wish.
+           </small>
+          </div>
+         </li>
+         <li>
+          <span>
+           03
+          </span>
+          <div>
+           <strong>
+            Complete the guided steps
+           </strong>
+           <small>
+            Follow the instructions on each screen.
+           </small>
+          </div>
+         </li>
+        </ol>
+        <button class="button button-outline" data-go="assessment">
+         View assessment steps
+         <span>
+          &rarr;
+         </span>
+        </button>
+       </article>
+       <article class="panel note-panel">
+        <span class="eyebrow">
+         A NOTE FOR FAMILIES
+        </span>
+        <h3>
+         Every reader learns differently.
+        </h3>
+        <p>
+         Neuro Vision helps organise reading-session observations. It does not diagnose dyslexia or replace advice from a qualified professional.
+        </p>
+        <div class="note-decoration">
+         N
+         <span>
+          V
+         </span>
+        </div>
+       </article>
+      </div>
+      <p class="caution-footer">
+       Neuro Vision is an experimental screening prototype, not a substitute for professional diagnosis.
+      </p>
+     </section>
+     <section class="page-section" id="page-assessment">
+      <div class="page-title-row">
+       <div>
+        <span class="eyebrow">
+         GUIDED SESSION
+        </span>
+        <h1>
+         New assessment
+        </h1>
+        <p>
+         Take one step at a time. You can follow the instructions on screen.
+        </p>
+       </div>
+      </div>
+      <div class="stepper" id="stepper">
+       <div class="step active">
+        <span>
+         1
+        </span>
+        <small>
+         Participant
+        </small>
+       </div>
+       <i>
+       </i>
+       <div class="step">
+        <span>
+         2
+        </span>
+        <small>
+         Devices
+        </small>
+       </div>
+       <i>
+       </i>
+       <div class="step">
+        <span>
+         3
+        </span>
+        <small>
+         Calibration
+        </small>
+       </div>
+       <i>
+       </i>
+       <div class="step">
+        <span>
+         4
+        </span>
+        <small>
+         Reading
+        </small>
+       </div>
+       <i>
+       </i>
+       <div class="step">
+        <span>
+         5
+        </span>
+        <small>
+         Complete
+        </small>
+       </div>
+      </div>
+      <article class="panel assessment-panel">
+       <div class="assessment-step active" data-step="1">
+        <div class="step-heading">
+         <span class="step-number">
+          STEP 01
+         </span>
+         <h2>
+          Who is taking part?
+         </h2>
+         <p>
+          Please enter the participant details with help from a parent, guardian or teacher.
+         </p>
+        </div>
+        <div class="instruction-strip">
+         <span>
+          🔊
+         </span>
+         <p id="instructionText">
+          First, tell us a little about the participant. All fields marked required must be completed.
+         </p>
+         <button class="hear-button" data-speak="First, enter the participant's name, age and gender. A parent or guardian must confirm consent before continuing.">
+          Hear instructions
+         </button>
+        </div>
+        <form class="form-grid" id="participantForm">
+         <div class="form-field full">
+          <label for="participantName">
+           Participant name
+          </label>
+          <input id="participantName" placeholder="Enter participant name" required="" type="text"/>
+         </div>
+         <div class="form-field">
+          <label for="participantAge">
+           Age
+          </label>
+          <select id="participantAge" required="">
+           <option value="">
+            Choose age
+           </option>
+           <option>
+            5
+           </option>
+           <option>
+            6
+           </option>
+           <option>
+            7
+           </option>
+           <option>
+            8
+           </option>
+           <option>
+            9
+           </option>
+           <option>
+            10
+           </option>
+           <option>
+            11
+           </option>
+           <option>
+            12
+           </option>
+          </select>
+         </div>
+         <div class="form-field">
+          <label for="participantGender">
+           Gender
+          </label>
+          <select id="participantGender" required="">
+           <option value="">
+            Choose an option
+           </option>
+           <option>
+            Female
+           </option>
+           <option>
+            Male
+           </option>
+           <option>
+            Other
+           </option>
+           <option>
+            Prefer not to say
+           </option>
+          </select>
+         </div>
+         <label class="consent-check full">
+          <input id="guardianConsent" required="" type="checkbox"/>
+          <span>
+           A parent or guardian has given permission for this assessment session.
+          </span>
+         </label>
+         <div class="form-actions full">
+          <span class="muted-note">
+           Your entries stay in this browser until you clear its stored data.
+          </span>
+          <button class="button button-dark" type="submit">
+           Continue
+           <span>
+            &rarr;
+           </span>
+          </button>
+         </div>
+        </form>
+       </div>
+       <div class="assessment-step" data-step="2">
+        <div class="step-heading">
+         <span class="step-number">
+          STEP 02
+         </span>
+         <h2>
+          Check your camera and microphone
+         </h2>
+         <p>
+          Allow access only if you are comfortable and have permission from your parent or guardian.
+         </p>
+        </div>
+        <div class="instruction-strip">
+         <span>
+          🔊
+         </span>
+         <p>
+          Place the camera at eye level. Sit in a well-lit room and keep your face comfortably inside the frame.
+         </p>
+         <button class="hear-button" data-speak="Place the camera at eye level. Sit in a well lit room. Ask an adult to help you allow camera and microphone access.">
+          Hear instructions
+         </button>
+        </div>
+        <div class="device-grid">
+         <div class="device-card">
+          <div class="device-card-head">
+           <div>
+            <span class="eyebrow">
+             CAMERA PREVIEW
+            </span>
+            <h3>
+             Video check
+            </h3>
+           </div>
+           <span class="device-status" id="cameraStatus">
+            Not started
+           </span>
+          </div>
+          <div class="camera-frame">
+           <video autoplay="" id="cameraVideo" muted="" playsinline="">
+           </video>
+           <div class="eye-tracking-status" id="eyeTrackingStatus" aria-live="polite">
+            MediaPipe will start when the camera is enabled.
+           </div>
+           <div id="cameraPlaceholder">
+            <span>
+             ◉
+            </span>
+            <p>
+             Your camera preview will appear here.
+            </p>
+           </div>
+          </div>
+          <div class="device-actions">
+           <select aria-label="Camera selection" id="cameraSelect">
+            <option value="">
+             Default camera
+            </option>
+           </select>
+           <button class="button button-small button-outline" id="cameraButton">
+            Enable camera
+           </button>
+          </div>
+         </div>
+         <div class="device-card">
+          <div class="device-card-head">
+           <div>
+            <span class="eyebrow">
+             MICROPHONE
+            </span>
+            <h3>
+             Audio check
+            </h3>
+           </div>
+           <span class="device-status" id="micStatus">
+            Not started
+           </span>
+          </div>
+          <div class="mic-visual">
+           <div class="mic-symbol">
+            ♫
+           </div>
+           <div class="audio-bars" id="audioBars">
+            <i>
+            </i>
+            <i>
+            </i>
+            <i>
+            </i>
+            <i>
+            </i>
+            <i>
+            </i>
+            <i>
+            </i>
+            <i>
+            </i>
+            <i>
+            </i>
+            <i>
+            </i>
+           </div>
+           <p id="micMessage">
+            Enable microphone to check audio input.
+           </p>
+          </div>
+          <div class="device-actions">
+           <select aria-label="Microphone selection" id="micSelect">
+            <option value="">
+             Default microphone
+            </option>
+           </select>
+           <button class="button button-small button-outline" id="micButton">
+            Enable microphone
+           </button>
+          </div>
+         </div>
+        </div>
+        <div class="inline-notice">
+         Camera and microphone access is optional for exploring this interface. Live features depend on your browser and device permissions.
+        </div>
+        <div class="form-actions">
+         <button class="button button-ghost" data-prev="">
+          &larr; Back
+         </button>
+         <button class="button button-dark" data-next="">
+          Continue
+          <span>
+           &rarr;
+          </span>
+         </button>
+        </div>
+       </div>
+       <div class="assessment-step" data-step="3">
+        <div class="step-heading">
+         <span class="step-number">
+          STEP 03
+         </span>
+         <h2>
+          Eye calibration
+         </h2>
+         <p>
+          Follow the target with your eyes during the nine-point calibration flow.
+         </p>
+        </div>
+        <div class="instruction-strip">
+         <span>
+          🔊
+         </span>
+         <p>
+          Keep your head comfortably still and look at each dot as it appears. Do not strain your eyes.
+         </p>
+         <button class="hear-button" data-speak="Look at the target dot as it moves to each position. Keep your head comfortable. You can blink normally. This is the calibration step.">
+          Hear instructions
+         </button>
+        </div>
+        <div class="calibration-layout">
+         <div class="calibration-screen" id="calibrationScreen">
+          <div class="calibration-target" id="calibrationTarget">
+          </div>
+          <div class="gaze-cursor" id="gazeCursor" aria-label="Estimated gaze position"></div>
+          <span class="calibration-label">
+           LOOK AT THE DOT
+          </span>
+          <div class="calibration-area-box" aria-hidden="true"></div>
+          <div class="calibration-overlay-ui hidden" id="calibrationOverlayUi">
+           <strong id="calibrationOverlayText">Get ready</strong>
+           <button class="button button-small button-outline" id="calibrationOverlayClose" type="button">Cancel (Esc)</button>
+          </div>
+         </div>
+         <div class="calibration-side">
+          <span class="eyebrow">
+           CALIBRATION PROGRESS
+          </span>
+          <strong class="calibration-count" id="calibrationCount">
+           0 / 9
+          </strong>
+          <div class="progress-track">
+           <span id="calibrationProgress">
+           </span>
+          </div>
+          <p id="calibrationMessage">
+           Press start when you are ready.
+          </p>
+          <button class="button button-primary" id="calibrationButton">
+           Start calibration
+          </button>
+          <button class="button button-outline" id="gazeTestButton" disabled>
+           Test gaze mapping
+          </button>
+          <div class="inline-notice">
+           Calibration runs full-window: nine dots appear across the whole screen and the mapping from iris position to screen position is fitted from them. The same mapping is then used to find the word you are looking at while reading. This webcam estimate is experimental and not clinically validated.
+          </div>
+         </div>
+        </div>
+        <div class="form-actions">
+         <button class="button button-ghost" data-prev="">
+          &larr; Back
+         </button>
+         <button class="button button-dark" data-next="">
+          Continue
+          <span>
+           &rarr;
+          </span>
+         </button>
+        </div>
+       </div>
+       <div class="assessment-step" data-step="4">
+        <div class="step-heading">
+         <span class="step-number">
+          STEP 04
+         </span>
+         <h2>
+          Read the passage
+         </h2>
+         <p>
+          Read at a natural pace. It is okay to take your time.
+         </p>
+        </div>
+        <div class="instruction-strip">
+         <span>
+          🔊
+         </span>
+         <p>
+          Read the passage aloud from beginning to end. Word colours indicate words recognised by speech input, not a judgement.
+         </p>
+         <button class="hear-button" data-speak="Read the passage aloud at your own pace. You can pause if you need to. When you finish, press stop reading.">
+          Hear instructions
+         </button>
+        </div>
+        <div class="reading-toolbar">
+         <span class="age-level" id="passageLevel">
+          AGE-BASED PASSAGE
+         </span>
+         <span id="readingTimer">
+          00:00
+         </span>
+        </div>
+        <div class="gaze-capture-status" id="gazeCaptureStatus" aria-live="polite">Eye tracking: not calibrated</div>
+        <div class="reading-passage" id="readingPassage">
+         Choose participant details first to load an age-appropriate reading passage.
+        </div>
+        <div class="reading-legend">
+         <span>
+          <i class="legend-green">
+          </i>
+          Matched words
+         </span>
+         <span>
+          <i class="legend-red">
+          </i>
+          Not matched yet
+         </span>
+         <span>
+          <i class="legend-yellow">
+          </i>
+          Close match
+         </span>
+        </div>
+        <div class="reading-controls">
+         <button class="button button-outline" id="startSpeech">
+          Start reading
+         </button>
+         <button class="button button-ghost" disabled="" id="stopSpeech">
+          Stop reading
+         </button>
+         <span class="speech-status" id="speechStatus">
+          Speech recognition not started
+         </span>
+        </div>
+        <div class="transcript-box">
+         <span class="eyebrow">
+          RECOGNISED WORDS
+         </span>
+         <p id="transcriptText">
+          Your speech transcript will appear here when supported by your browser.
+         </p>
+        </div>
+        <div class="form-actions">
+         <button class="button button-ghost" data-prev="">
+          &larr; Back
+         </button>
+         <button class="button button-dark" id="finishAssessment">
+          Finish assessment
+          <span>
+           &rarr;
+          </span>
+         </button>
+        </div>
+       </div>
+       <div class="assessment-step" data-step="5">
+        <div class="completion-mark">&checkmark;</div>
+        <h2>Thank you for taking part!</h2>
+        <div class="completion-actions">
+         <button class="button button-primary" data-go="reports" data-resume>View report</button>
+         <button class="button button-outline" data-go="analytics" data-resume>View reading analytics</button>
+        </div>
+       </div>
+      </article>
+      <section class="learning-section">
+       <div class="section-intro">
+        <div>
+         <span class="eyebrow">
+          LEARN AS YOU GO
+         </span>
+         <h2>
+          Reading movement words
+         </h2>
+         <p>
+          These terms help describe how eyes may move across a line of text.
+         </p>
+        </div>
+       </div>
+       <div class="learning-grid">
+        <article>
+         <span class="learning-symbol">
+          ●
+         </span>
+         <h3>
+          Fixation
+         </h3>
+         <p>
+          A short pause when the eyes focus on one place, such as a word.
+         </p>
+         <button class="hear-button" data-speak="A fixation is a short pause when your eyes focus on one place, such as a word.">
+          Hear meaning
+         </button>
+        </article>
+        <article>
+         <span class="learning-symbol">
+          &curvearrowleft;
+         </span>
+         <h3>
+          Regression
+         </h3>
+         <p>
+          An eye movement back to an earlier part of the text.
+         </p>
+         <button class="hear-button" data-speak="A regression is an eye movement back to an earlier part of the text.">
+          Hear meaning
+         </button>
+        </article>
+        <article>
+         <span class="learning-symbol">
+          ➜
+         </span>
+         <h3>
+          Saccade
+         </h3>
+         <p>
+          A quick movement of the eyes from one place to another.
+         </p>
+         <button class="hear-button" data-speak="A saccade is a quick movement of the eyes from one place to another.">
+          Hear meaning
+         </button>
+        </article>
+        <article>
+         <span class="learning-symbol">
+          &nearrow;
+         </span>
+         <h3>
+          Saccade amplitude
+         </h3>
+         <p>
+          The distance covered by the eyes during one saccade.
+         </p>
+         <button class="hear-button" data-speak="Saccade amplitude means the distance covered by the eyes during one quick movement.">
+          Hear meaning
+         </button>
+        </article>
+       </div>
+      </section>
+     </section>
+     <section class="page-section" id="page-history">
+      <div class="page-title-row">
+       <div>
+        <span class="eyebrow">PAST SESSIONS</span>
+        <h1>Assessment History</h1>
+        <p>Completed assessment sessions are listed here.</p>
+       </div>
+      </div>
+      <div class="panel table-panel">
+       <div class="table-toolbar">
+        <input id="historySearch" placeholder="Search participant or ID" type="search"/>
+       </div>
+       <div class="table-wrap">
+        <table>
+         <thead>
+          <tr>
+           <th>Session ID</th>
+           <th>Participant</th>
+           <th>Date</th>
+           <th>Reading duration</th>
+           <th>Report</th>
+          </tr>
+         </thead>
+         <tbody id="historyBody"></tbody>
+        </table>
+       </div>
+      </div>
+     </section>
+     <section class="page-section" id="page-analytics">
+       <div class="page-title-row analytics-title">
+        <div>
+         <span class="eyebrow">READING OBSERVATIONS</span>
+         <h1>Reading Analytics</h1>
+         <p>Eye-movement analysis of the completed assessment, compared with the training dataset.</p>
+        </div>
+       </div>
+       <div class="analytics-empty panel" id="analyticsEmpty">
+        <div class="empty-state-icon"><span aria-hidden="true">◎</span></div>
+        <h2>No measured analytics available yet</h2>
+        <p>Reading analytics appear here after an assessment is completed. This page never shows invented fixation, regression or saccade values.</p>
+        <button class="button button-primary" data-go="assessment">Start a new assessment</button>
+       </div>
+       <div class="analytics-results hidden" id="analyticsResults">
+        <div class="page-nav-bar">
+         <button class="button button-small button-ghost" data-back type="button">&larr; Back to <span class="back-target">Dashboard</span></button>
+         <label class="session-picker">Session
+          <select id="analyticsSessionSelect" aria-label="Choose assessment session"></select>
+         </label>
+         <button class="button button-small button-primary" data-go="reports" data-resume type="button">View full report &rarr;</button>
+        </div>
+        <div class="analytics-banner">
+         <div>
+          <span class="eyebrow light-eyebrow">READING ANALYTICS</span>
+          <h2 id="analyticsBannerTitle">—</h2>
+          <p id="analyticsBannerSub">—</p>
+         </div>
+         <div class="banner-orbit" aria-hidden="true">◎</div>
+        </div>
+        <div class="inline-notice hidden" id="analyticsNotice"></div>
+        <div class="metric-grid" id="analyticsMetrics"></div>
+
+        <div class="chart-grid">
+         <article class="chart-card chart-wide needs-analysis">
+          <div class="chart-heading"><div><span class="eyebrow">SCANPATH</span><h3>Where the eyes went across the passage</h3></div><span class="chart-tag">FROM GAZE</span></div>
+          <div class="scanpath-wrap" id="scanpathWrap"><canvas id="scanpathCanvas" aria-label="Scanpath over the reading passage"></canvas></div>
+          <div class="scanpath-legend">
+           <span><i class="lg read"></i>Read</span><span><i class="lg spoken"></i>Spoken, no gaze</span><span><i class="lg gazed"></i>Gaze, not recognised</span><span><i class="lg skipped"></i>Skipped</span>
+           <span><i class="lg fwd"></i>Forward move</span><span><i class="lg back"></i>Regression</span>
+          </div>
+         </article>
+         <article class="chart-card needs-analysis">
+          <div class="chart-heading"><div><span class="eyebrow">READING FLOW</span><h3>Word position per fixation</h3></div><span class="chart-tag">REGRESSIONS</span></div>
+          <div class="chart-box"><canvas id="chartProgress"></canvas></div>
+         </article>
+         <article class="chart-card needs-analysis">
+          <div class="chart-heading"><div><span class="eyebrow">TIME ON TEXT</span><h3>Time spent per word</h3></div><span class="chart-tag">MILLISECONDS</span></div>
+          <div class="chart-box"><canvas id="chartDwell"></canvas></div>
+         </article>
+         <article class="chart-card needs-analysis">
+          <div class="chart-heading"><div><span class="eyebrow">SPEECH × GAZE</span><h3>Word cross-check</h3></div><span class="chart-tag">SKIPPED WORDS</span></div>
+          <div class="chart-box"><canvas id="chartCross"></canvas></div>
+         </article>
+         <article class="chart-card needs-features">
+          <div class="chart-heading"><div><span class="eyebrow">PROFILE</span><h3>Features vs training data</h3></div><span class="chart-tag">Z-SCORE</span></div>
+          <div class="chart-box"><canvas id="chartZ"></canvas></div>
+         </article>
+        </div>
+
+        <section class="panel analytics-panel">
+         <span class="eyebrow">WHAT THIS MEANS</span>
+         <h3>Key observations from this session</h3>
+         <ul class="findings-list" id="analyticsFindings"></ul>
+        </section>
+
+        <section class="panel analytics-panel needs-features">
+         <span class="eyebrow">THE 12 MODEL FEATURES</span>
+         <h3>Feature values compared with the training dataset</h3>
+         <div class="table-wrap">
+          <table class="data-table">
+           <thead><tr><th>#</th><th>Feature</th><th>Value</th><th>Unit</th><th>Typical range (Q1–Q3)</th><th>Status</th></tr></thead>
+           <tbody id="analyticsFeatureBody"></tbody>
+          </table>
+         </div>
+        </section>
+
+        <section class="panel analytics-panel">
+         <span class="eyebrow">MODEL PERFORMANCE</span>
+         <h3>Model Evaluation: SVM vs Random Forest Comparison</h3>
+         <div id="analyticsModelTable"></div>
+        </section>
+       </div>
+      </section>
+      <section class="page-section" id="page-reports">
+       <div class="page-title-row report-title">
+        <div>
+         <span class="eyebrow">SESSION DOCUMENTS</span>
+         <h1>Reports</h1>
+         <p>Reports are created from completed assessment sessions.</p>
+        </div>
+       </div>
+       <div class="report-empty panel" id="reportEmpty">
+        <div class="empty-state-icon"><span aria-hidden="true">▤</span></div>
+        <h2>No completed assessment report</h2>
+        <p>After a participant completes an assessment, the report is available here. No participant or measurement records are preloaded.</p>
+        <button class="button button-primary" data-go="assessment">Start a new assessment</button>
+       </div>
+       <div class="report-layout hidden" id="reportContent">
+        <article class="nv-report" id="reportPreview">
+         <header class="nv-head">
+          <div class="nv-logo"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M4.5 24s6.7-12 19.5-12 19.5 12 19.5 12-6.7 12-19.5 12S4.5 24 4.5 24Z" fill="#fff" stroke="#0f5f57" stroke-width="2"/><circle cx="24" cy="24" r="8" fill="#e98e83" stroke="#0f5f57" stroke-width="2"/><circle cx="24" cy="24" r="3.5" fill="#173f3a"/></svg></div>
+          <div class="nv-brand"><strong>Neuro Vision</strong><small>INSIGHTS WITHIN</small></div>
+          <div class="nv-title"><strong>ASSESSMENT REPORT:</strong><span>Developmental Dyslexia</span></div>
+          <div class="nv-brain" aria-hidden="true"><svg viewBox="0 0 64 64"><g fill="none" stroke="#8fe0cf" stroke-width="2.6" stroke-linecap="round"><path d="M32 10v44"/><path d="M30 14c-6-5-16-1-16 7-5 3-5 11 0 14-2 8 6 14 13 11 2 2 3 2 3 2"/><path d="M34 14c6-5 16-1 16 7 5 3 5 11 0 14 2 8-6 14-13 11-2 2-3 2-3 2"/><path d="M20 26c4 0 6 3 6 6M44 26c-4 0-6 3-6 6M22 42c3-1 5-3 5-6M42 42c-3-1-5-3-5-6"/></g></svg></div>
+         </header>
+         <section class="nv-person">
+          <div class="nv-person-main">
+           <h3><span>PARTICIPANT :</span> <b id="rptName">—</b></h3>
+           <ul><li>Age: <span id="rptAge">—</span> &nbsp;|&nbsp; Gender: <span id="rptGender">—</span></li><li>Assessment Date: <span id="rptAssessDate">—</span></li></ul>
+          </div>
+          <div class="nv-person-side">
+           <p>Report ID: <span id="rptSessionId">—</span></p>
+           <p>Analysis Date: <span id="rptReportDate">—</span></p>
+           <p>Model Version: RF v1.0</p>
+          </div>
+         </section>
+         <section class="nv-labels">
+          <div class="nv-label-box none" id="rptDiagnosisBox"><span>DIAGNOSED:</span><strong id="rptDiagnosis">—</strong></div>
+          <div class="nv-label-box none" id="rptRiskBox"><span>RISK:</span><strong id="rptRisk">—</strong></div>
+         </section>
+         <section class="nv-body">
+          <aside class="nv-side">
+           <h4>ASSESSMENT DETAILS</h4>
+           <div class="nv-side-item"><i>◉</i><span>Eye-Tracking Analysis (Webcam)</span></div>
+           <div class="nv-side-item"><i>▥</i><span>Features Extracted: Fixations, Saccades, Regressions</span></div>
+           <div class="nv-side-item"><i>⚙</i><span>Classification Method: Random Forest</span></div>
+           <hr>
+           <h4>ABOUT THIS REPORT</h4>
+           <p>This report presents the results of your eye-tracking assessment based on eye-movement patterns and reading behavior.</p>
+           <hr>
+           <p class="nv-quote">Early detection can help you get the right support and guidance. ♡</p>
+          </aside>
+          <div class="nv-main">
+           <table class="nv-table">
+            <thead><tr><th>METRIC</th><th>RESULT</th><th>RANGE</th><th>INTERPRETATION</th></tr></thead>
+            <tbody id="rptMetricBody"></tbody>
+           </table>
+           <div class="nv-summary"><div class="nv-bulb" aria-hidden="true">💡</div><div><h4>SUMMARY</h4><p id="rptSummary"></p></div></div>
+           <div class="nv-regards"><p>Warm Regards,</p><div class="nv-sign">Neuro Vision</div><strong>Neuro Vision Team</strong></div>
+          </div>
+         </section>
+         <footer class="nv-foot">
+          <div><p>☎ &nbsp; +91 98765 43210</p><p>✉ &nbsp; support@neurovision.ai</p><p>🌐 &nbsp; www.neurovision.ai</p></div>
+          <em>Together for a<br>Brighter Reading Future ♡</em>
+         </footer>
+        </article>
+        <aside class="report-actions-panel">
+         <span class="eyebrow">REPORT ACTIONS</span>
+         <h3>Download session report</h3>
+         <p>Download or print the assessment report for this participant.</p>
+         <label class="session-picker dark">Session
+          <select id="reportSessionSelect" aria-label="Choose assessment session"></select>
+         </label>
+         <button class="button button-primary button-full" id="downloadReport">Download PDF report</button>
+         <p class="download-note" id="downloadMessage" aria-live="polite"></p>
+         <button class="button button-outline button-full" id="printReport">Print report</button>
+         <div class="report-nav-buttons">
+          <button class="button button-outline button-full" data-go="analytics" data-resume type="button">View reading analytics</button>
+          <button class="button button-ghost button-full" data-back type="button">&larr; Back to <span class="back-target">Dashboard</span></button>
+         </div>
+        </aside>
+       </div>
+      </section>
+      
+<section class="page-section" id="page-settings">
+      <div class="page-title-row">
+       <div>
+        <span class="eyebrow">
+         PREFERENCES
+        </span>
+        <h1>
+         Settings
+        </h1>
+        <p>
+         Manage the display and device options for this browser.
+        </p>
+       </div>
+      </div>
+      <div class="settings-grid">
+       <article class="panel settings-card">
+        <span class="settings-icon">
+         ◉
+        </span>
+        <h3>
+         Camera and microphone
+        </h3>
+        <p>
+         Choose a device when your browser makes one available.
+        </p>
+        <label for="settingsCamera">
+         Camera
+        </label>
+        <select id="settingsCamera">
+         <option>
+          Default camera
+         </option>
+        </select>
+        <label for="settingsMic">
+         Microphone
+        </label>
+        <select id="settingsMic">
+         <option>
+          Default microphone
+         </option>
+        </select>
+        <small>
+         Device lists appear after browser permissions are granted.
+        </small>
+       </article>
+       <article class="panel settings-card">
+        <span class="settings-icon">
+         ◐
+        </span>
+        <h3>
+         Display preferences
+        </h3>
+        <p>
+         Adjust the interface for your viewing comfort.
+        </p>
+        <label class="setting-switch">
+         <span>
+          Show helper tips
+         </span>
+         <input checked="" id="showTips" type="checkbox"/>
+         <i>
+         </i>
+        </label>
+       </article>
+       <article class="panel settings-card">
+        <span class="settings-icon">
+         🔊
+        </span>
+        <h3>
+         Audio instructions
+        </h3>
+        <p>
+         Use spoken instructions where supported by your browser.
+        </p>
+        <button class="button button-outline" data-speak="Welcome to Neuro Vision. You can use the Hear instructions buttons to listen to guidance at each step.">
+         Test spoken instructions
+        </button>
+       </article>
+      </div>
+     </section>
+     <section class="page-section" id="page-help">
+      <div class="page-title-row">
+       <div>
+        <span class="eyebrow">
+         WE ARE HERE TO HELP
+        </span>
+        <h1>
+         Help &amp; support
+        </h1>
+        <p>
+         Simple instructions for participants, families and mentors.
+        </p>
+       </div>
+      </div>
+      <div class="help-hero">
+       <div>
+        <span class="eyebrow light-eyebrow">
+         TAKE IT ONE STEP AT A TIME
+        </span>
+        <h2>
+         You can go at your own pace.
+        </h2>
+        <p>
+         Ask a parent, guardian or teacher for help whenever you need it.
+        </p>
+       </div>
+       
+      </div>
+      <div class="help-grid">
+       <article class="panel help-card">
+        <span>
+         01
+        </span>
+        <h3>
+         Camera position
+        </h3>
+        <p>
+         Keep the camera near eye level. Sit comfortably and make sure the room has enough light.
+        </p>
+        <button class="hear-button" data-speak="Keep the camera near eye level. Sit comfortably and make sure the room has enough light.">
+         Hear this tip
+        </button>
+       </article>
+       <article class="panel help-card">
+        <span>
+         02
+        </span>
+        <h3>
+         Calibration
+        </h3>
+        <p>
+         Look at each target dot as it appears. Blink normally and avoid forcing your eyes to stay open.
+        </p>
+        <button class="hear-button" data-speak="Look at each target dot as it appears. Blink normally and do not strain your eyes.">
+         Hear this tip
+        </button>
+       </article>
+       <article class="panel help-card">
+        <span>
+         03
+        </span>
+        <h3>
+         Reading passage
+        </h3>
+        <p>
+         Read at a comfortable pace. You can pause, take a breath and continue when ready.
+        </p>
+        <button class="hear-button" data-speak="Read at a comfortable pace. You can pause, take a breath and continue when ready.">
+         Hear this tip
+        </button>
+       </article>
+      </div>
+      <div class="panel faq-panel">
+       <span class="eyebrow">
+        COMMON QUESTIONS
+       </span>
+       <h3>
+        Frequently asked questions
+       </h3>
+       <details>
+        <summary>
+         Why is my camera preview not appearing?
+        </summary>
+        <p>
+         Check that your browser supports camera access, that the page is served from localhost or HTTPS, and that permission has been allowed.
+        </p>
+       </details>
+       <details>
+        <summary>
+         Why is speech recognition unavailable?
+        </summary>
+        <p>
+         Speech recognition support differs by browser and device. Try a supported browser and check microphone permission. You can still review the other application sections.
+        </p>
+       </details>
+       <details>
+        <summary>
+         Does this application diagnose dyslexia?
+        </summary>
+        <p>
+         No. Neuro Vision is an experimental screening prototype. It is not a clinical diagnosis or a replacement for assessment by a qualified professional.
+        </p>
+       </details>
+       <details>
+        <summary>
+         Which measurements are currently available?
+        </summary>
+        <p>
+         The current frontend records participant details, reading duration and available speech transcript. Eye-movement analysis and model predictions require integration of the measurement pipeline and trained model.
+        </p>
+       </details>
+      </div>
+     </section>
+    </div>
+   </main>
+  </div>
+  <div aria-live="polite" class="toast" id="toast" role="status">
+  </div>
+  <script src="reading-analysis.js">
+  </script>
+  <script src="script.js">
+  </script>
+  <script src="report.js">
+  </script>
+ </body>
+</html>

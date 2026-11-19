@@ -1,0 +1,15 @@
+﻿__pycache__/
+*.pyc
+venv/
+.venv/
+.env
+.env.*
+users.json
+assessments.json
+.vscode/
+.DS_Store
+Thumbs.db
+/NEUROVISION/
+.venv312/
+.venv312/
+.venv312/

@@ -1,0 +1,18 @@
+NEURO VISION - HOW TO RUN (Windows)
+
+EASIEST: double-click  start_neuro_vision.bat
+  - it creates the Python environment, installs packages, checks MySQL, starts the server
+    and opens http://127.0.0.1:8000 in your browser (use Chrome).
+  - the web app is served by the backend, so there is nothing else to start.
+
+MANUAL:
+  cd neuro-vision-backend
+  py -3.12 -m venv .venv
+  .venv\Scripts\activate
+  pip install -r requirements.txt
+  python check_database.py
+  python -m uvicorn main:app --host 127.0.0.1 --port 8000
+  then open http://127.0.0.1:8000
+
+Use Python 3.10-3.13 (your Python 3.15 is too new for scikit-learn 1.7.2 wheels).
+Report contact details (phone/email/web) can be edited in neuro-vision-frontend/report.js (REPORT_CONTACT).
